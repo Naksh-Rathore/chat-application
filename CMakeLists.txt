@@ -40,6 +40,7 @@ file(GLOB_RECURSE CLIENT_SOURCES CONFIGURE_DEPENDS
 add_executable(client ${CLIENT_SOURCES})
 
 target_link_libraries(client PRIVATE mrp)
+target_include_directories(client PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
 
 # -----------------------------
 # Server
@@ -51,6 +52,7 @@ file(GLOB_RECURSE SERVER_SOURCES CONFIGURE_DEPENDS
 add_executable(server ${SERVER_SOURCES})
 
 target_link_libraries(server PRIVATE mrp)
+target_include_directories(server PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
 
 # -----------------------------
 # Warnings (optional)

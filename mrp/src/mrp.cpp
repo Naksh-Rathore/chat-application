@@ -10,6 +10,19 @@ MRPHeader::MRPHeader(const std::string& client_name, const std::string& utc_date
     , messageData(message_data + "\n")
 {}
 
+MRPHeader::MRPHeader(const std::string& formattedHeader) 
+    : clientName(formattedHeader.substr(0, formattedHeader.find('|')))
+{
+    std::string formattedHeaderCopy = formattedHeader;
+    formattedHeaderCopy.erase(0, formattedHeaderCopy.find('|') + 1);
+
+    utcDate = formattedHeaderCopy.substr(0, formattedHeaderCopy.find('|'));
+    formattedHeaderCopy.erase(0, formattedHeaderCopy.find('|') + 1);
+    
+    messageData = formattedHeaderCopy.substr(0, formattedHeaderCopy.find('\n'));
+}
+
+
 std::string MRPHeader::getFormattedHeader() const {
     std::string formattedHeader = "";
 

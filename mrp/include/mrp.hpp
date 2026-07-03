@@ -8,6 +8,7 @@ struct MRPHeader {
     std::string messageData;
 
     MRPHeader(const std::string& client_name, const std::string& utc_date, const std::string& messageData);
+    MRPHeader(const std::string& formattedHeader);
 
     std::string getFormattedHeader() const;
 };

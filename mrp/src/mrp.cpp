@@ -7,7 +7,7 @@
 MRPHeader::MRPHeader(const std::string& client_name, const std::string& utc_date, const std::string& message_data)
     : clientName(client_name)
     , utcDate(utc_date)
-    , messageData(message_data + "\n")
+    , messageData(message_data)
 {}
 
 MRPHeader::MRPHeader(const std::string& formattedHeader) 

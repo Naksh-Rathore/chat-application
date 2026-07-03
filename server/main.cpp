@@ -1,19 +1,24 @@
-#include <iostream>
-#include <vector>
-
+#include "server.hpp"
 #include "database/database.hpp"
-#include "mrp/include/mrp.hpp"
+
+#include <iostream>
+
+#include <asio.hpp>
 
 int main() {
 
-    Database database{};
+    try {
+        asio::io_context ioContext;
 
-    database.createMRPTable();
-    database.createMRPHeader(MRPHeader("client1", getCurrentUTCDate(), "wsp bro"));
-    std::vector<MRPHeader> mrpHeaders = database.getMRPHeaders(5);
+        Database database{};
+        Server server(ioContext, database);
 
-    for (MRPHeader mrpHeader : mrpHeaders)
-        std::cout << mrpHeader.clientName << " " << mrpHeader.utcDate << " " << mrpHeader.messageData;
+        ioContext.run();
+    }
+
+    catch (std::exception &e) {
+        std::cerr << e.what() << "\n";
+    }
 
     return 0;
 }
